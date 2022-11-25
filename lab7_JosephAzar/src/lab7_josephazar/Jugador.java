@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  */
 public class Jugador {
     private String nombre, posicion;
-    private int dorsal, goles, cantPartidos, asistencias, amarillas, rojas, faltas, faltas_Recibidas;
+    private int dorsal, goles, cantPartidos, asistencias, amarillas, rojas, faltas, faltas_Recibidas, porterias;
 
     public Jugador(String nombre, String posicion, int dorsal, int goles, int cantPartidos, int asistencias, int amarillas, int rojas, int faltas, int faltas_Recibidas) {
         this.nombre = nombre;
@@ -28,7 +28,29 @@ public class Jugador {
         this.faltas_Recibidas = faltas_Recibidas;
     }
 
+    public Jugador(String nombre, String posicion, int dorsal, int goles, int cantPartidos, int asistencias, int amarillas, int rojas, int faltas, int faltas_Recibidas, int porterias) {
+        this.nombre = nombre;
+        this.posicion = posicion;
+        this.dorsal = dorsal;
+        this.goles = goles;
+        this.cantPartidos = cantPartidos;
+        this.asistencias = asistencias;
+        this.amarillas = amarillas;
+        this.rojas = rojas;
+        this.faltas = faltas;
+        this.faltas_Recibidas = faltas_Recibidas;
+        this.porterias = porterias;
+    }
+
     public Jugador() {
+    }
+
+    public int getPorterias() {
+        return porterias;
+    }
+
+    public void setPorterias(int porterias) {
+        this.porterias = porterias;
     }
 
     public String getNombre() {

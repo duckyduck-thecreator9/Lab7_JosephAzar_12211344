@@ -47,6 +47,41 @@ public class Principal extends javax.swing.JFrame {
      tx_contrasena.setText("");
     }
     
+    public void escribir_equipo(Equipo e) {              
+
+        File archivo = null;
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+        Scanner sc = null;
+        try {
+            String jugadores = "";
+            ArrayList<Jugador> ju = e.getJugadores();
+            for (int i = 0; i < e.getJugadores().size(); i++) {
+               jugadores += ju.get(i).getNombre() + ";";
+            }
+            archivo = new File("./Equipos.txt");
+            fw = new FileWriter(archivo, true);
+            bw = new BufferedWriter(fw);
+
+            bw.append( e.getNombre() + ", " + e.getPartidos() + ", " + e.getPg()+ ", " + e.getPe() + ", " + e.getPp() + ", " + e.getGf() + ", " + e.getGc() + ", " + e.getDif() + ", " + jugadores);
+            bw.append("\n");
+            bw.flush();
+            System.out.println(e.getNombre());
+
+            sc = new Scanner(archivo);
+
+        } catch (IOException a) {
+            a.printStackTrace();
+        }
+        try {
+            bw.close();
+            fw.close();
+        } catch (IOException ex) {
+            
+        }
+
+    }  
+    
     private void Vaciar_Usuario() {
         
         File archivo = null;
@@ -108,6 +143,27 @@ public class Principal extends javax.swing.JFrame {
      jD_Registrarse.pack();
      jD_Registrarse.setLocationRelativeTo(this);
      jD_Registrarse.setVisible(rootPaneCheckingEnabled);
+    }
+    
+    private void aparecer_Ingresar() {
+     Ingresar_equipo.setModal(true);
+     Ingresar_equipo.pack();
+     Ingresar_equipo.setLocationRelativeTo(this);
+     Ingresar_equipo.setVisible(rootPaneCheckingEnabled);
+    }
+    
+    private void aparecer_Jugadores() {
+     Ingresar_jugadores.setModal(true);
+     Ingresar_jugadores.pack();
+     Ingresar_jugadores.setLocationRelativeTo(this);
+     Ingresar_jugadores.setVisible(rootPaneCheckingEnabled);
+    }
+    
+    private void aparecer_crear() {
+     crear_ediitar.setModal(true);
+     crear_ediitar.pack();
+     crear_ediitar.setLocationRelativeTo(this);
+     crear_ediitar.setVisible(rootPaneCheckingEnabled);
     }
     
     private void login (String usuario, String contrasena) {
@@ -181,6 +237,36 @@ public class Principal extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
+        crear_ediitar = new javax.swing.JDialog();
+        jLabel9 = new javax.swing.JLabel();
+        jc_grupo = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jc_el = new javax.swing.JComboBox<>();
+        jc_ev = new javax.swing.JComboBox<>();
+        jButton5 = new javax.swing.JButton();
+        jt_pl = new javax.swing.JTextField();
+        jt_rl = new javax.swing.JTextField();
+        jt_fl = new javax.swing.JTextField();
+        jt_tl = new javax.swing.JTextField();
+        jt_pv = new javax.swing.JTextField();
+        jt_rv = new javax.swing.JTextField();
+        jt_fv = new javax.swing.JTextField();
+        jt_tv = new javax.swing.JTextField();
+        Ingresar_equipo = new javax.swing.JDialog();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        nm_equipo = new javax.swing.JTextField();
+        jButton6 = new javax.swing.JButton();
+        Ingresar_jugadores = new javax.swing.JDialog();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        Equipos = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -505,6 +591,234 @@ public class Principal extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel9.setText("Crear Partido");
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel11.setText("Grupo");
+
+        jLabel12.setText("Equipo local");
+
+        jLabel13.setText("Equipo visitante");
+
+        jLabel14.setText("Posesion");
+
+        jLabel15.setText("Resultado");
+
+        jLabel16.setText("Faltas");
+
+        jLabel17.setText("Tiros");
+
+        jc_ev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jc_evActionPerformed(evt);
+            }
+        });
+
+        jButton5.setBackground(java.awt.Color.white);
+        jButton5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton5.setForeground(java.awt.Color.blue);
+        jButton5.setText("Ingresar al sistema");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jt_pl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jt_plActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout crear_ediitarLayout = new javax.swing.GroupLayout(crear_ediitar.getContentPane());
+        crear_ediitar.getContentPane().setLayout(crear_ediitarLayout);
+        crear_ediitarLayout.setHorizontalGroup(
+            crear_ediitarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(crear_ediitarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(crear_ediitarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(crear_ediitarLayout.createSequentialGroup()
+                        .addGroup(crear_ediitarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jc_el, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(crear_ediitarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(crear_ediitarLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel11)
+                                .addGap(18, 18, 18)
+                                .addComponent(jc_grupo, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 40, Short.MAX_VALUE))
+                            .addGroup(crear_ediitarLayout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addGroup(crear_ediitarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                                    .addComponent(jc_ev, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(crear_ediitarLayout.createSequentialGroup()
+                        .addGroup(crear_ediitarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jt_pl)
+                            .addComponent(jt_rl)
+                            .addComponent(jt_fl)
+                            .addComponent(jt_tl))
+                        .addGap(28, 28, 28)
+                        .addGroup(crear_ediitarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(crear_ediitarLayout.createSequentialGroup()
+                                .addGroup(crear_ediitarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(19, 19, 19)
+                                .addGroup(crear_ediitarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jt_fv, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
+                                    .addComponent(jt_tv)))
+                            .addGroup(crear_ediitarLayout.createSequentialGroup()
+                                .addGroup(crear_ediitarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, crear_ediitarLayout.createSequentialGroup()
+                                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                    .addGroup(crear_ediitarLayout.createSequentialGroup()
+                                        .addComponent(jLabel15)
+                                        .addGap(11, 11, 11)))
+                                .addGroup(crear_ediitarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jt_rv, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
+                                    .addComponent(jt_pv))))
+                        .addGap(71, 71, 71))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, crear_ediitarLayout.createSequentialGroup()
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27))))
+        );
+        crear_ediitarLayout.setVerticalGroup(
+            crear_ediitarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(crear_ediitarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(crear_ediitarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jc_grupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(crear_ediitarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(crear_ediitarLayout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(crear_ediitarLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(crear_ediitarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jc_el, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jc_ev, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(crear_ediitarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(jt_pl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jt_pv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(crear_ediitarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(jt_rl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jt_rv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(crear_ediitarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(jt_fl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jt_fv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(crear_ediitarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(jt_tl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jt_tv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton5)
+                .addContainerGap())
+        );
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel18.setText("Creacion de seleccion");
+
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel19.setText("Nombre");
+
+        nm_equipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nm_equipoActionPerformed(evt);
+            }
+        });
+
+        jButton6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton6.setText("Crear seleccion");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout Ingresar_equipoLayout = new javax.swing.GroupLayout(Ingresar_equipo.getContentPane());
+        Ingresar_equipo.getContentPane().setLayout(Ingresar_equipoLayout);
+        Ingresar_equipoLayout.setHorizontalGroup(
+            Ingresar_equipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Ingresar_equipoLayout.createSequentialGroup()
+                .addGroup(Ingresar_equipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Ingresar_equipoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Ingresar_equipoLayout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(jLabel18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Ingresar_equipoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel19))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Ingresar_equipoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(nm_equipo)))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+        Ingresar_equipoLayout.setVerticalGroup(
+            Ingresar_equipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Ingresar_equipoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(nm_equipo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel20.setText("Agregar jugador a seleccion");
+
+        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel21.setText("Seleccion a la que pertenece");
+
+        javax.swing.GroupLayout Ingresar_jugadoresLayout = new javax.swing.GroupLayout(Ingresar_jugadores.getContentPane());
+        Ingresar_jugadores.getContentPane().setLayout(Ingresar_jugadoresLayout);
+        Ingresar_jugadoresLayout.setHorizontalGroup(
+            Ingresar_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Ingresar_jugadoresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Ingresar_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel20)
+                    .addGroup(Ingresar_jugadoresLayout.createSequentialGroup()
+                        .addComponent(jLabel21)
+                        .addGap(18, 18, 18)
+                        .addComponent(Equipos, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(96, Short.MAX_VALUE))
+        );
+        Ingresar_jugadoresLayout.setVerticalGroup(
+            Ingresar_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Ingresar_jugadoresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(Ingresar_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(Equipos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(226, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -540,6 +854,11 @@ public class Principal extends javax.swing.JFrame {
                 jButton2MouseExited(evt);
             }
         });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(java.awt.Color.white);
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -551,6 +870,11 @@ public class Principal extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 jButton3MouseExited(evt);
+            }
+        });
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -594,6 +918,7 @@ public class Principal extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
        this.setVisible(false);
+       aparecer_crear();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
@@ -775,6 +1100,45 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jD_RegistrarseMouseClicked
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        aparecer_Ingresar();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        for (int i = 0; i < equipos.size(); i++) {
+            Equipos.addItem(equipos.get(i).getNombre());
+        }
+        aparecer_Jugadores();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jt_plActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jt_plActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jt_plActionPerformed
+
+    private void jc_evActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jc_evActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jc_evActionPerformed
+
+    private void nm_equipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nm_equipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nm_equipoActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        ArrayList jugadores = new ArrayList();
+        Equipo e = new Equipo(nm_equipo.getText(), 0, 0, 0, 0, 0, 0, 0, jugadores);
+        equipos.add(e);
+        escribir_equipo(e);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -815,23 +1179,41 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> Equipos;
+    private javax.swing.JDialog Ingresar_equipo;
+    private javax.swing.JDialog Ingresar_jugadores;
+    private javax.swing.JDialog crear_ediitar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JDialog jD_Login;
     private javax.swing.JDialog jD_Registrarse;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JDialog jP_menu;
     private javax.swing.JPanel jP_menu1;
     private javax.swing.JPanel jPanel6;
@@ -840,11 +1222,24 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JTextField jT_usuario;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JComboBox<String> jc_el;
+    private javax.swing.JComboBox<String> jc_ev;
+    private javax.swing.JComboBox<String> jc_grupo;
+    private javax.swing.JTextField jt_fl;
+    private javax.swing.JTextField jt_fv;
+    private javax.swing.JTextField jt_pl;
+    private javax.swing.JTextField jt_pv;
     private javax.swing.JPasswordField jt_registroc;
     private javax.swing.JTextField jt_registrou;
+    private javax.swing.JTextField jt_rl;
+    private javax.swing.JTextField jt_rv;
+    private javax.swing.JTextField jt_tl;
+    private javax.swing.JTextField jt_tv;
+    private javax.swing.JTextField nm_equipo;
     private javax.swing.JPasswordField tx_contrasena;
     // End of variables declaration//GEN-END:variables
 static ArrayList<Usuario> Usuarios = new ArrayList<Usuario>();
 static Random r = new Random();
 static ArrayList<Usuario> admins = new ArrayList<Usuario>();
+static ArrayList<Equipo> equipos = new ArrayList<Equipo>();
 }
