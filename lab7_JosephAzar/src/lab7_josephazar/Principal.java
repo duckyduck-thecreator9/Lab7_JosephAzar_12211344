@@ -20,6 +20,7 @@ import java.util.Arrays;
 import javax.swing.JOptionPane;
 import java.util.Random;
 import java.util.Scanner;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -298,7 +299,11 @@ public class Principal extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jt_estadisticas = new javax.swing.JTable();
         jPanel9 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jt_goleadores = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
         crear_ediitar = new javax.swing.JDialog();
         jLabel9 = new javax.swing.JLabel();
@@ -334,7 +339,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jNombre = new javax.swing.JTextField();
-        dorsal = new javax.swing.JTextField();
+        dorsalb = new javax.swing.JTextField();
         jButton9 = new javax.swing.JButton();
         posicion = new javax.swing.JComboBox<>();
         p1 = new javax.swing.JRadioButton();
@@ -570,6 +575,12 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
+        jTabbedPane2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane2MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -578,7 +589,7 @@ public class Principal extends javax.swing.JFrame {
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 299, Short.MAX_VALUE)
+            .addGap(0, 383, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("tab1", jPanel6);
@@ -591,36 +602,80 @@ public class Principal extends javax.swing.JFrame {
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 299, Short.MAX_VALUE)
+            .addGap(0, 383, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("tab2", jPanel7);
+
+        jt_estadisticas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Equipo", "Patidos Ganados", "Partidos perdidos"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jt_estadisticas);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 633, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 299, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("tab3", jPanel8);
+        jTabbedPane2.addTab("Estadisticas por equipo", jPanel8);
+
+        jt_goleadores.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Equipo", "Jugador", "goles"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jt_goleadores);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 633, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 299, Short.MAX_VALUE)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("tab4", jPanel9);
+        jTabbedPane2.addTab("Tabla de goleadores", jPanel9);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel10.setText("Bienvenido");
@@ -930,7 +985,7 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(Ingresar_jugadoresLayout.createSequentialGroup()
                         .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45)
-                        .addComponent(dorsal)
+                        .addComponent(dorsalb)
                         .addGap(18, 18, 18)
                         .addComponent(p1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -961,10 +1016,10 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(Ingresar_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
-                    .addComponent(dorsal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(p1)
                     .addComponent(p13)
-                    .addComponent(p26))
+                    .addComponent(p26)
+                    .addComponent(dorsalb, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(Ingresar_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel24)
@@ -1305,14 +1360,14 @@ public class Principal extends javax.swing.JFrame {
 
     private void posicionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_posicionItemStateChanged
         // TODO add your handling code here:
-        dorsal.setVisible(false);
+        dorsalb.setVisible(false);
         if ( posicion.getSelectedItem().equals("Portero") ) {
         p1.setVisible(true);
         p13.setVisible(true);
         p26.setVisible(true);
         posicion.setVisible(true);
         } else {
-            dorsal.setVisible(true);
+            dorsalb.setVisible(true);
             posicion.setVisible(true);
         }
     }//GEN-LAST:event_posicionItemStateChanged
@@ -1347,8 +1402,8 @@ public class Principal extends javax.swing.JFrame {
             }
         }
             }
-        }  else {
-        Jugador j = new Jugador(jNombre.getText(), (String)posicion.getSelectedItem(), dorsal);       
+        }  else {            
+        Jugador j = new Jugador(jNombre.getText(), (String)posicion.getSelectedItem(), Integer.parseInt(dorsalb.getText()) );       
         for (int i = 0; i < equipos.size(); i++) {
             if ( equipos.get(i).getNombre().equals((String)Equipos.getSelectedItem()) ) {
                 equipos.get(i).getJugadores().add(j);
@@ -1362,6 +1417,25 @@ public class Principal extends javax.swing.JFrame {
         Ingresar_jugadores.setVisible(false);
         this.setVisible(true);
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jTabbedPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane2MouseClicked
+        // TODO add your handling code here:
+        
+        for (int i = 0; i < equipos.size(); i++) {
+            DefaultTableModel model = (DefaultTableModel) jt_estadisticas.getModel();
+        model.addRow(new Object[]{ equipos.get(i).getNombre(), equipos.get(i).getPg(), equipos.get(i).getPe() } );
+        }
+        
+        for (int i = 0; i < equipos.size(); i++) {
+            for (int j = 0; j < equipos.get(i).getJugadores().size(); j++) {
+                DefaultTableModel model = (DefaultTableModel) jt_goleadores.getModel();
+                ArrayList<Jugador> a = equipos.get(i).getJugadores();
+                model.addRow(new Object[]{ equipos.get(i).getNombre(), a.get(j).getNombre(), a.get(i).getGoles() } );
+            }
+        }
+        
+
+    }//GEN-LAST:event_jTabbedPane2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -1407,7 +1481,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JDialog Ingresar_equipo;
     private javax.swing.JDialog Ingresar_jugadores;
     private javax.swing.JDialog crear_ediitar;
-    private javax.swing.JTextField dorsal;
+    private javax.swing.JTextField dorsalb;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -1450,13 +1524,17 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jT_usuario;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JComboBox<String> jc_el;
     private javax.swing.JComboBox<String> jc_ev;
     private javax.swing.JComboBox<String> jc_grupo;
+    private javax.swing.JTable jt_estadisticas;
     private javax.swing.JTextField jt_fl;
     private javax.swing.JTextField jt_fv;
+    private javax.swing.JTable jt_goleadores;
     private javax.swing.JTextField jt_pl;
     private javax.swing.JTextField jt_pv;
     private javax.swing.JPasswordField jt_registroc;
