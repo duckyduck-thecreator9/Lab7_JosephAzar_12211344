@@ -33,6 +33,7 @@ public class Principal extends javax.swing.JFrame {
     public Principal() throws IOException {
         initComponents();
         Llenar_Usuarios();
+        Llenar_Equipos();
         this.setLocationRelativeTo(this);
         this.setVisible(false);
         System.out.println(Usuarios.size());
@@ -60,7 +61,7 @@ public class Principal extends javax.swing.JFrame {
                jugadores += ju.get(i).getNombre() + ";";
             }
             archivo = new File("./Equipos.txt");
-            fw = new FileWriter(archivo, true);
+            fw = new FileWriter(archivo, false);
             bw = new BufferedWriter(fw);
 
             bw.append( e.getNombre() + ", " + e.getPartidos() + ", " + e.getPg()+ ", " + e.getPe() + ", " + e.getPp() + ", " + e.getGf() + ", " + e.getGc() + ", " + e.getDif() + ", " + jugadores);
@@ -69,6 +70,44 @@ public class Principal extends javax.swing.JFrame {
             System.out.println(e.getNombre());
 
             sc = new Scanner(archivo);
+
+        } catch (IOException a) {
+            a.printStackTrace();
+        }
+        try {
+            bw.close();
+            fw.close();
+        } catch (IOException ex) {
+            
+        }
+
+    }  
+    
+    public void escribir_equipos(ArrayList<Equipo> e) {              
+
+        File archivo = null;
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+        Scanner sc = null;
+        try {
+            for (int i = 0; i < e.size(); i++) {
+                
+            String jugadores = "";
+//            ArrayList<Jugador> ju = e.get(i).getJugadores();
+//            for (int j = 0; j < e.get(i).getJugadores().size(); i++) {
+//               jugadores += (String)ju.get(j).toString();
+//            }
+            
+            archivo = new File("./Equipos.txt");
+            fw = new FileWriter(archivo, false);
+            bw = new BufferedWriter(fw);
+
+            bw.append( e.get(i).getNombre() + ", " + e.get(i).getPartidos() + ", " + e.get(i).getPg()+ ", " + e.get(i).getPe() + ", " + e.get(i).getPp() + ", " + e.get(i).getGf() + ", " + e.get(i).getGc() + ", " + e.get(i).getDif() + ", " + e.get(i).getJugadores());
+            bw.append("\n");
+            bw.flush();
+            System.out.println(e.get(i).getNombre());
+            
+            }
 
         } catch (IOException a) {
             a.printStackTrace();
@@ -105,6 +144,40 @@ public class Principal extends javax.swing.JFrame {
         System.out.println("Exception have been caught");
 
     }
+    }
+    
+    private void Llenar_Equipos() throws IOException {
+        
+        File archivo = null;
+        FileReader fr = null;
+        BufferedReader br = null;
+        
+        try {
+            archivo = new File ("./Equipos.txt");
+            fr = new FileReader(archivo);
+            br = new BufferedReader(fr);
+            String linea = "";
+            
+            
+            while ( (linea = br.readLine()) != null) {
+                String[] tokens = linea.split(", ");
+                ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
+                Equipo n = new Equipo( tokens[0], Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5]), Integer.parseInt(tokens[6]), Integer.parseInt(tokens[7]), jugadores );
+                equipos.add(n);   
+                String[] lista = tokens[8].split("]");
+                for (int j = 0; j < lista.length; j++) {
+                    String[] jugador = lista[j].split(";");
+                    Jugador p = new Jugador(jugador[0], jugador[1], Integer.parseInt(jugador[2]), Integer.parseInt(jugador[3]), Integer.parseInt(jugador[4]), Integer.parseInt(jugador[5]), Integer.parseInt(jugador[6]), Integer.parseInt(jugador[7]), Integer.parseInt(jugador[8]), Integer.parseInt(jugador[9]) );
+                    jugadores.add(p);
+                }
+                
+                System.out.println(equipos);
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        br.close();
+        fr.close();
     }
     
     private void Llenar_Usuarios() throws IOException {
@@ -267,6 +340,17 @@ public class Principal extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         Equipos = new javax.swing.JComboBox<>();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jNombre = new javax.swing.JTextField();
+        dorsal = new javax.swing.JTextField();
+        jButton9 = new javax.swing.JButton();
+        posicion = new javax.swing.JComboBox<>();
+        p1 = new javax.swing.JRadioButton();
+        p13 = new javax.swing.JRadioButton();
+        p26 = new javax.swing.JRadioButton();
+        numer_portero = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -793,6 +877,44 @@ public class Principal extends javax.swing.JFrame {
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel21.setText("Seleccion a la que pertenece");
 
+        jLabel22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel22.setText("Nombre");
+
+        jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel23.setText("Dorsal");
+
+        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel24.setText("Posicion");
+
+        jNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jNombreActionPerformed(evt);
+            }
+        });
+
+        jButton9.setText("Agregar");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
+        posicion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Defensa", "Medio campista", "Delantero", "Portero" }));
+        posicion.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                posicionItemStateChanged(evt);
+            }
+        });
+
+        numer_portero.add(p1);
+        p1.setText("1");
+
+        numer_portero.add(p13);
+        p13.setText("13");
+
+        numer_portero.add(p26);
+        p26.setText("26");
+
         javax.swing.GroupLayout Ingresar_jugadoresLayout = new javax.swing.GroupLayout(Ingresar_jugadores.getContentPane());
         Ingresar_jugadores.getContentPane().setLayout(Ingresar_jugadoresLayout);
         Ingresar_jugadoresLayout.setHorizontalGroup(
@@ -800,12 +922,38 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(Ingresar_jugadoresLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Ingresar_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel20)
                     .addGroup(Ingresar_jugadoresLayout.createSequentialGroup()
-                        .addComponent(jLabel21)
+                        .addGroup(Ingresar_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Ingresar_jugadoresLayout.createSequentialGroup()
+                                .addComponent(jLabel22)
+                                .addGap(35, 35, 35)
+                                .addComponent(jNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
+                            .addComponent(jLabel21))
                         .addGap(18, 18, 18)
-                        .addComponent(Equipos, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(96, Short.MAX_VALUE))
+                        .addComponent(Equipos, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17))
+                    .addGroup(Ingresar_jugadoresLayout.createSequentialGroup()
+                        .addComponent(jLabel24)
+                        .addGap(34, 34, 34)
+                        .addComponent(posicion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(41, 41, 41))
+                    .addGroup(Ingresar_jugadoresLayout.createSequentialGroup()
+                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(dorsal)
+                        .addGap(18, 18, 18)
+                        .addComponent(p1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(p13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(p26, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Ingresar_jugadoresLayout.createSequentialGroup()
+                        .addGroup(Ingresar_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Ingresar_jugadoresLayout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel20))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         Ingresar_jugadoresLayout.setVerticalGroup(
             Ingresar_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -816,7 +964,24 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(Ingresar_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
                     .addComponent(Equipos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(226, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(Ingresar_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(jNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(Ingresar_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23)
+                    .addComponent(dorsal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(p1)
+                    .addComponent(p13)
+                    .addComponent(p26))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(Ingresar_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel24)
+                    .addComponent(posicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1112,6 +1277,9 @@ public class Principal extends javax.swing.JFrame {
         for (int i = 0; i < equipos.size(); i++) {
             Equipos.addItem(equipos.get(i).getNombre());
         }
+        p1.setVisible(false);
+        p13.setVisible(false);
+        p26.setVisible(false);
         aparecer_Jugadores();
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -1137,7 +1305,72 @@ public class Principal extends javax.swing.JFrame {
         Equipo e = new Equipo(nm_equipo.getText(), 0, 0, 0, 0, 0, 0, 0, jugadores);
         equipos.add(e);
         escribir_equipo(e);
+        Ingresar_equipo.setVisible(false);
+        this.setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jNombreActionPerformed
+
+    private void posicionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_posicionItemStateChanged
+        // TODO add your handling code here:
+        dorsal.setVisible(false);
+        if ( posicion.getSelectedItem().equals("Portero") ) {
+        p1.setVisible(true);
+        p13.setVisible(true);
+        p26.setVisible(true);
+        posicion.setVisible(true);
+        } else {
+            dorsal.setVisible(true);
+            posicion.setVisible(true);
+        }
+    }//GEN-LAST:event_posicionItemStateChanged
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        int dorsal = 0;
+        if ( posicion.getSelectedItem().equals("Portero") ) {
+            if(p1.isSelected()) {
+                dorsal = Integer.parseInt(p1.getText());
+                Jugador j = new Jugador(jNombre.getText(), (String)posicion.getSelectedItem(), dorsal);
+                
+                for (int i = 0; i < equipos.size(); i++) {
+                    if ( equipos.get(i).getNombre().equals((String)Equipos.getSelectedItem()) ) {
+                    equipos.get(i).getJugadores().add(j);
+            }
+        }
+            } else if(p13.isSelected()) {
+                dorsal = Integer.parseInt(p13.getText());
+                Jugador j = new Jugador(jNombre.getText(), (String)posicion.getSelectedItem(), dorsal);
+                for (int i = 0; i < equipos.size(); i++) {
+            if ( equipos.get(i).getNombre().equals((String)Equipos.getSelectedItem()) ) {
+                equipos.get(i).getJugadores().add(j);
+            }
+        }
+            } else if(p26.isSelected()) {
+                dorsal = Integer.parseInt(p26.getText());
+                Jugador j = new Jugador(jNombre.getText(), (String)posicion.getSelectedItem(), dorsal);
+                for (int i = 0; i < equipos.size(); i++) {
+            if ( equipos.get(i).getNombre().equals((String)Equipos.getSelectedItem()) ) {
+                equipos.get(i).getJugadores().add(j);
+            }
+        }
+            }
+        }  else {
+        Jugador j = new Jugador(jNombre.getText(), (String)posicion.getSelectedItem(), dorsal);       
+        for (int i = 0; i < equipos.size(); i++) {
+            if ( equipos.get(i).getNombre().equals((String)Equipos.getSelectedItem()) ) {
+                equipos.get(i).getJugadores().add(j);
+            }
+        }
+        }
+        System.out.println(equipos);
+        escribir_equipos(equipos);
+        
+        Ingresar_jugadores.setVisible(false);
+        this.setVisible(true);
+    }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1183,6 +1416,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JDialog Ingresar_equipo;
     private javax.swing.JDialog Ingresar_jugadores;
     private javax.swing.JDialog crear_ediitar;
+    private javax.swing.JTextField dorsal;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -1191,6 +1425,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JDialog jD_Login;
     private javax.swing.JDialog jD_Registrarse;
     private javax.swing.JLabel jLabel1;
@@ -1207,6 +1442,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1214,6 +1452,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField jNombre;
     private javax.swing.JDialog jP_menu;
     private javax.swing.JPanel jP_menu1;
     private javax.swing.JPanel jPanel6;
@@ -1236,6 +1475,11 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField jt_tl;
     private javax.swing.JTextField jt_tv;
     private javax.swing.JTextField nm_equipo;
+    private javax.swing.ButtonGroup numer_portero;
+    private javax.swing.JRadioButton p1;
+    private javax.swing.JRadioButton p13;
+    private javax.swing.JRadioButton p26;
+    private javax.swing.JComboBox<String> posicion;
     private javax.swing.JPasswordField tx_contrasena;
     // End of variables declaration//GEN-END:variables
 static ArrayList<Usuario> Usuarios = new ArrayList<Usuario>();

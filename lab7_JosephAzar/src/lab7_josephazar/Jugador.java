@@ -42,6 +42,12 @@ public class Jugador {
         this.porterias = porterias;
     }
 
+    public Jugador(String nombre, String posicion, int dorsal) {
+        this.nombre = nombre;
+        this.posicion = posicion;
+        this.dorsal = dorsal;
+    }
+
     public Jugador() {
     }
 
@@ -139,7 +145,7 @@ public class Jugador {
 
     @Override
     public String toString() {
-        return "Jugador{" + "nombre=" + nombre + ", posicion=" + posicion + ", dorsal=" + dorsal + ", goles=" + goles + ", cantPartidos=" + cantPartidos + ", asistencias=" + asistencias + ", amarillas=" + amarillas + ", rojas=" + rojas + ", faltas=" + faltas + ", faltas_Recibidas=" + faltas_Recibidas + '}';
+        return nombre + ";" + posicion + ";" + dorsal + ";" + goles + ";" + cantPartidos + ";" + asistencias + ";" + amarillas + ";" + rojas + ";" + faltas + ";" + faltas_Recibidas;
     }
         
     

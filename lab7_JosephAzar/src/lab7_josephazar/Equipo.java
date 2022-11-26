@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Equipo {
     private String nombre;
     private int partidos, pg, pe, pp, gf, gc, dif;
-    private ArrayList<Jugador> Jugadores;
+    private ArrayList Jugadores;
 
     public Equipo(String nombre, int partidos, int pg, int pe, int pp, int gf, int gc, int dif) {
         this.nombre = nombre;
@@ -41,7 +41,7 @@ public class Equipo {
 
     @Override
     public String toString() {
-        return "Equipo{" + "nombre=" + nombre + ", partidos=" + partidos + ", pg=" + pg + ", pe=" + pe + ", pp=" + pp + ", gf=" + gf + ", gc=" + gc + ", dif=" + dif + ", Jugadores=" + Jugadores + '}';
+        return nombre + ", " + partidos + ", " + pg + ", " + pe + ", " + pp + ", " + gf + ", " + gc + ", " + dif + ", " + Jugadores;
     }
 
     public String getNombre() {
