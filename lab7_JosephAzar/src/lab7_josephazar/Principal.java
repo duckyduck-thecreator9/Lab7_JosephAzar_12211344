@@ -55,16 +55,13 @@ public class Principal extends javax.swing.JFrame {
         BufferedWriter bw = null;
         Scanner sc = null;
         try {
-            String jugadores = "";
             ArrayList<Jugador> ju = e.getJugadores();
-            for (int i = 0; i < e.getJugadores().size(); i++) {
-               jugadores += ju.get(i).getNombre() + ";";
-            }
+
             archivo = new File("./Equipos.txt");
             fw = new FileWriter(archivo, false);
             bw = new BufferedWriter(fw);
 
-            bw.append( e.getNombre() + ", " + e.getPartidos() + ", " + e.getPg()+ ", " + e.getPe() + ", " + e.getPp() + ", " + e.getGf() + ", " + e.getGc() + ", " + e.getDif() + ", " + jugadores);
+            bw.append( e.getNombre() + ", " + e.getPartidos() + ", " + e.getPg()+ ", " + e.getPe() + ", " + e.getPp() + ", " + e.getGf() + ", " + e.getGc() + ", " + e.getDif() + ", " + ju);
             bw.append("\n");
             bw.flush();
             System.out.println(e.getNombre());
@@ -90,17 +87,10 @@ public class Principal extends javax.swing.JFrame {
         BufferedWriter bw = null;
         Scanner sc = null;
         try {
-            for (int i = 0; i < e.size(); i++) {
-                
-            String jugadores = "";
-//            ArrayList<Jugador> ju = e.get(i).getJugadores();
-//            for (int j = 0; j < e.get(i).getJugadores().size(); i++) {
-//               jugadores += (String)ju.get(j).toString();
-//            }
-            
             archivo = new File("./Equipos.txt");
             fw = new FileWriter(archivo, false);
             bw = new BufferedWriter(fw);
+            for (int i = 0; i < e.size(); i++) {                
 
             bw.append( e.get(i).getNombre() + ", " + e.get(i).getPartidos() + ", " + e.get(i).getPg()+ ", " + e.get(i).getPe() + ", " + e.get(i).getPp() + ", " + e.get(i).getGf() + ", " + e.get(i).getGc() + ", " + e.get(i).getDif() + ", " + e.get(i).getJugadores());
             bw.append("\n");
@@ -1304,7 +1294,7 @@ public class Principal extends javax.swing.JFrame {
         ArrayList jugadores = new ArrayList();
         Equipo e = new Equipo(nm_equipo.getText(), 0, 0, 0, 0, 0, 0, 0, jugadores);
         equipos.add(e);
-        escribir_equipo(e);
+        System.out.println(equipos.size());
         Ingresar_equipo.setVisible(false);
         this.setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -1366,6 +1356,7 @@ public class Principal extends javax.swing.JFrame {
         }
         }
         System.out.println(equipos);
+        //escribir_equipo()
         escribir_equipos(equipos);
         
         Ingresar_jugadores.setVisible(false);
@@ -1486,4 +1477,5 @@ static ArrayList<Usuario> Usuarios = new ArrayList<Usuario>();
 static Random r = new Random();
 static ArrayList<Usuario> admins = new ArrayList<Usuario>();
 static ArrayList<Equipo> equipos = new ArrayList<Equipo>();
+
 }

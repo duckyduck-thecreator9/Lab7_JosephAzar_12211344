@@ -1,1 +1,2 @@
-Olympia, 0, 0, 0, 0, 0, 0, 0, [Pablo;Defensa;0;0;0;0;0;0;0;0]
+Motagua, 0, 0, 0, 0, 0, 0, 0, [jorge;Defensa;0;0;0;0;0;0;0;0, pablo;Defensa;0;0;0;0;0;0;0;0]
+Olympia, 0, 0, 0, 0, 0, 0, 0, [pablo;Defensa;0;0;0;0;0;0;0;0]
